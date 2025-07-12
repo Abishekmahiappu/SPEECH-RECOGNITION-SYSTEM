@@ -1,0 +1,57 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ea7e54e2-c2dc-4936-a169-6bc91c2ba9d3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "const startBtn = document.getElementById(\"start-btn\");\n",
+    "const output = document.getElementById(\"output\");\n",
+    "\n",
+    "const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;\n",
+    "const recognition = new SpeechRecognition();\n",
+    "\n",
+    "recognition.continuous = false;\n",
+    "recognition.lang = \"en-US\";\n",
+    "recognition.interimResults = false;\n",
+    "\n",
+    "startBtn.addEventListener(\"click\", () => {\n",
+    "  recognition.start();\n",
+    "  output.textContent = \"Listening...\";\n",
+    "});\n",
+    "\n",
+    "recognition.onresult = (event) => {\n",
+    "  const transcript = event.results[0][0].transcript;\n",
+    "  output.textContent = \"You said: \" + transcript;\n",
+    "};\n",
+    "\n",
+    "recognition.onerror = (event) => {\n",
+    "  output.textContent = \"Error: \" + event.error;\n",
+    "};\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
